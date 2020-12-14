@@ -13,6 +13,6 @@ UPDATE vol SET pilot_2=1 WHERE depart_vol_date='2019-06-23'
 ````
 
 Ajouter une nouvelle destination, l'aéroport de  Pochentong à Phnom Penh :
-````dsl
+````sql
 INSERT INTO destination(ville, aeroport) VALUES('Phnom Penh', 'Pochentong')
 ````
