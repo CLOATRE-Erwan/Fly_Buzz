@@ -16,3 +16,14 @@ Ajouter une nouvelle destination, l'aéroport de  Pochentong à Phnom Penh :
 ````sql
 INSERT INTO destination(ville, aeroport) VALUES('Phnom Penh', 'Pochentong')
 ````
+
+````sql
+create view pilote_avion
+as select pilotes.nom, appareils.numero from pilotes
+join vol_pilote on vol_pilote.id_pilote = pilotes.id_pilote
+join vols on vols.id_vol = vol_pilote.id_vol
+join appareils on vols.id_appareil = appareils.id_appareil;
+
+
+select * from pilote_avion order by nom
+````
