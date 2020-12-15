@@ -27,6 +27,7 @@ join appareils on vols.id_appareil = appareils.id_appareil;
 
 select * from pilote_avion order by nom
 ````
+
 ````sql
 DELIMITER //
 CREATE PROCEDURE afficher_avions_avant (IN date_arg YEAR)
@@ -35,6 +36,7 @@ SELECT * FROM appareils AS a WHERE a.date_entree_service < date_arg;
 END //
 DELIMITER
 ````
+
 ````sql
 DELIMITER //
 CREATE PROCEDURE vols_avion
@@ -45,6 +47,7 @@ FROM vols
 WHERE avion = (SELECT id from appareils WHERE numero = numero_avion);
 END //
 DELIMITER ;
+````
 
 ````sql
 DELIMITER |
