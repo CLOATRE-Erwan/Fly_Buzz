@@ -27,3 +27,34 @@ join appareils on vols.id_appareil = appareils.id_appareil;
 
 select * from pilote_avion order by nom
 ````
+`````sql
+DELIMITER //
+CREATE PROCEDURE afficher_avions_avant (IN date_arg YEAR)
+BEGIN
+SELECT * FROM appareils AS a WHERE a.date_entree_service < date_arg;
+END //
+DELIMITER
+````
+````sql
+DELIMITER //
+CREATE PROCEDURE vols_avion
+(IN numero_avion CHAR(5))
+BEGIN
+SELECT numero, (SELECT ville FROM destinations WHERE depart = id) AS ville_depart, (SELECT ville FROM destinations WHERE arrivee = id) AS ville_arrivee, date_depart, date_arrivee
+FROM vols
+WHERE avion = (SELECT id from appareils WHERE numero = numero_avion);
+END //
+DELIMITER ;
+
+`````sql
+DELIMITER |
+
+CREATE PROCEDURE duree_vol2 
+(IN p_num_vol VARCHAR(5)) 
+BEGIN 
+SELECT *, TIMEDIFF((ADDTIME(date_arrivee, heure_arrivee)), (ADDTIME(date_depart, heure_depart))) AS duree_vol FROM vols WHERE num_vol = p_num_vol;
+END|
+DELIMITER
+
+CALL duree_vol2('MS293')
+````
